@@ -55,7 +55,15 @@ save_dir = user_dir + "\Documents\JDN Converter\"
             <string>///Convert the video
 //Create .bat file
 var test = file_text_open_write(game_save_id + "nohud.bat");
-file_text_write_string(test, 'ffmpeg -i ' + '"' + string(nohud_file) + '"' + ' -vf scale=1280:720 -bsf:v h264_mp4toannexb -hls_list_size 0 ' + '"' + save_dir + string_replace(filename_name(get_nohud), ".mp4", "") + "\playlist.m3u8" + '"');
+if (get_nohud != "*.mp4")
+{
+    output_folder = string_replace(filename_name(get_nohud), ".mp4", "");
+}
+if (get_nohud != "*.webm")
+{
+    output_folder = string_replace(filename_name(get_nohud), ".webm", "");
+}
+file_text_write_string(test, 'ffmpeg -i ' + '"' + string(nohud_file) + '"' + ' -vf scale=1280:720 -bsf:v h264_mp4toannexb -hls_list_size 0 ' + '"' + save_dir + output_folder + "\playlist.m3u8" + '"');
 file_text_writeln(test);
 file_text_close(test);
 
@@ -92,11 +100,16 @@ if (mouse_check_button_released(mb_left))
     //Get the .mp4 file
     if (point_in_rectangle(mouse_x, mouse_y, 16, (48*2) + 16, 464, (88*1.5) + 16))
     {
-        get_nohud = get_open_filename("No HUDs (.mp4)|*.mp4", "")
-        if (get_nohud != "")
+        get_nohud = get_open_filename("MP4 files (.mp4)|*.mp4|WEBM files (.webm)|*.webm", "")
+        if (get_nohud != "*.mp4")
         {
             nohud_file = get_nohud;
             directory_create_fmns(save_dir + string_replace(filename_name(get_nohud), ".mp4", ""));
+        }
+        if (get_nohud != "*.webm")
+        {
+            nohud_file = get_nohud;
+            directory_create_fmns(save_dir + string_replace(filename_name(get_nohud), ".webm", ""));
         }
     }
     
