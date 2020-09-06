@@ -2,7 +2,7 @@
 It converts .mp4 files into .m3u8 to work with Just Dance Now
 
 ## Basic info
-Basically, a GUI tool for a specific FFMPEG command, that converts and makes .mp4 files compatible with Just Dance Now
+Basically, a GUI tool for a specific FFMPEG command, that converts and makes ``.mp4`` and ``.webm`` files compatible with Just Dance Now
 
 ### How to build
 - Download GameMaker: Studio (needs to be v1.4.9999)
